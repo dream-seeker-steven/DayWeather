@@ -1,5 +1,6 @@
 package cn.suyyy.dayweather.logic.common
 
+import cn.suyyy.dayweather.constants.CoreConstant
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -7,6 +8,7 @@ object ServiceCreator {
 
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(CoreConstant.CITY_URL)
         .build()
 
     fun <T> create(serviceClass: Class<T>): T = retrofit.create(serviceClass)

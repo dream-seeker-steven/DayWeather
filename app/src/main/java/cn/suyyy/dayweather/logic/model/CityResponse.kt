@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  * 城市信息
  */
 
-class CityResponse(val code: String, @SerializedName("location") val locationList: List<Location>)
+class CityResponse(val code: String, @SerializedName("location") val cityList: List<City>)
 
 /*
 {

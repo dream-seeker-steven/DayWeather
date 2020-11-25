@@ -1,8 +1,6 @@
 package cn.suyyy.dayweather.logic.model
 
-import com.google.gson.annotations.SerializedName
-
-class HotCityResponse(val code: String,  val topCityList: List<Location>)
+class HotCityResponse(val code: String,  val topCityList: List<City>)
 
 /*
 * {
