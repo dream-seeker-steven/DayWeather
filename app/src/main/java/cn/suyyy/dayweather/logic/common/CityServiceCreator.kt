@@ -4,6 +4,10 @@ import cn.suyyy.dayweather.constants.CoreConstant
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * 构造retrofit请求并解析json
+ */
+
 object CityServiceCreator {
 
     private val retrofit = Retrofit.Builder()

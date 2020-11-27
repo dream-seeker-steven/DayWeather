@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cn.suyyy.dayweather.logic.model.City
 
-class CitySelectAdapter(private val cityList: List<City>) : RecyclerView.Adapter<CitySelectAdapter.ViewHolder>() {
+class CitySelectAdapter(private val cityList: List<City>) :
+    RecyclerView.Adapter<CitySelectAdapter.ViewHolder>() {
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     }
 

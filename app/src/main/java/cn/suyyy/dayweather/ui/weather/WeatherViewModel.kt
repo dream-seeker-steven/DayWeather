@@ -5,7 +5,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import cn.suyyy.dayweather.logic.repository.Repository
 
-class WeatherViewModel : ViewModel(){
+class WeatherViewModel : ViewModel() {
     private val locationLiveData = MutableLiveData<String>()
 
     var location = ""
@@ -15,7 +15,7 @@ class WeatherViewModel : ViewModel(){
         Repository.refreshWeather(location)
     }
 
-    fun refreshWeather(query: String){
+    fun refreshWeather(query: String) {
         locationLiveData.value = query
     }
 }

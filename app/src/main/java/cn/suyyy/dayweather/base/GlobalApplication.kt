@@ -4,6 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 
+/*
+* 全局Application
+* */
+
 class GlobalApplication: Application() {
     companion object {
         @SuppressLint("StaticFieldLeak")

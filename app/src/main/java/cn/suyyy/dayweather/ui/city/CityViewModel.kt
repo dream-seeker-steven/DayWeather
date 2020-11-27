@@ -25,7 +25,7 @@ class CityViewModel : ViewModel() {
         searchCityLiveData.value = query
     }
 
-    fun getHotCityList(){
+    fun getHotCityList() {
         getHotCityLiveData.value = ""
     }
 

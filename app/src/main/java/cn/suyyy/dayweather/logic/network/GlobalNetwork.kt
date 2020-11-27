@@ -10,6 +10,9 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
+/**
+ * 使用协程优化请求
+ */
 
 object GlobalNetwork {
 
@@ -19,6 +22,7 @@ object GlobalNetwork {
     suspend fun searchCityList(query: String) = cityService.searchCityList(query).await()
     suspend fun getHotCityList() = cityService.getHotCityList().await()
 
+    // 将网络请求挂起
     suspend fun getRealTimeWeather(query: String) = weatherService.getRealTimeWeather(query).await()
     suspend fun getDaily(query: String) = weatherService.getDaily(query).await()
     suspend fun getHourly(query: String) = weatherService.getHourly(query).await()

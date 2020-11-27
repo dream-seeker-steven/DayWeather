@@ -38,38 +38,38 @@
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <ScrollView
-            android:id="@+id/weatherLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+            <ScrollView
+                android:id="@+id/weatherLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:scrollbars="none">
 
-                <include layout="@layout/realtime" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <include layout="@layout/daily" />
+                    <include layout="@layout/realtime" />
 
-                <include layout="@layout/realtime_hourly" />
+                    <include layout="@layout/daily" />
 
-                <include layout="@layout/minutely" />
+                    <include layout="@layout/realtime_hourly" />
 
-                <include layout="@layout/realtime_air" />
+                    <include layout="@layout/minutely" />
 
-                <include layout="@layout/realtime_wind" />
+                    <include layout="@layout/realtime_air" />
 
-                <include layout="@layout/realtime_sun" />
+                    <include layout="@layout/realtime_wind" />
 
-                <include layout="@layout/realtime_indices" />
-            </LinearLayout>
-        </ScrollView>
+                    <include layout="@layout/realtime_sun" />
+
+                    <include layout="@layout/realtime_indices" />
+                </LinearLayout>
+            </ScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

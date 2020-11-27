@@ -13,24 +13,24 @@
         <TextView
             android:id="@+id/realtimeIndicesName"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textSize="18sp"
-            android:layout_height="wrap_content"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/realtimeIndicesCategory"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:textSize="14sp"
             android:textColor="@color/second_text"
-            android:layout_height="wrap_content" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 
     <TextView
         android:id="@+id/realtimeIndicesText"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp" />
 </LinearLayout>
