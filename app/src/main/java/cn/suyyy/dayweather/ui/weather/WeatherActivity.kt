@@ -1,28 +1,26 @@
 package cn.suyyy.dayweather.ui.weather
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cn.suyyy.dayweather.R
 import cn.suyyy.dayweather.logic.model.Weather
-import cn.suyyy.dayweather.ui.city.CityFragment
-import cn.suyyy.dayweather.ui.city.CitySelectActivity
 import cn.suyyy.dayweather.util.IconUtils
 import cn.suyyy.dayweather.util.TypeUtils
 import cn.suyyy.dayweather.util.showToast
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_weather.*
-import kotlinx.android.synthetic.main.city_item.*
 import kotlinx.android.synthetic.main.daily.*
-import kotlinx.android.synthetic.main.daily_item.*
 import kotlinx.android.synthetic.main.minutely.*
 import kotlinx.android.synthetic.main.realtime.*
 import kotlinx.android.synthetic.main.realtime_air.*
@@ -32,6 +30,7 @@ import kotlinx.android.synthetic.main.realtime_sun.*
 import kotlinx.android.synthetic.main.realtime_wind.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class WeatherActivity : AppCompatActivity() {
 
@@ -75,18 +74,23 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar,menu)
+        menuInflater.inflate(R.menu.toolbar, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.cityMenu -> {
-
+                drawerLayout.openDrawer(GravityCompat.START)
             }
+            R.id.setting -> {
+                "敬请期待".showToast()
+            }
+
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     fun refreshWeather() {
         viewModel.refreshWeather(viewModel.location)
@@ -125,7 +129,8 @@ class WeatherActivity : AppCompatActivity() {
         hourlyLayout.removeAllViews()
         val hourlyList = weather.hourlyList
         for (i in hourlyList.indices) {
-            val view = LayoutInflater.from(this).inflate(R.layout.realtime_hourly_item, hourlyLayout, false)
+            val view = LayoutInflater.from(this)
+                .inflate(R.layout.realtime_hourly_item, hourlyLayout, false)
             val hourlyFxTime = view.findViewById(R.id.hourlyFxTime) as TextView
             val hourlySkyIcon = view.findViewById(R.id.hourlySkyIcon) as ImageView
             val hourlyText = view.findViewById(R.id.hourlyText) as TextView
@@ -143,7 +148,8 @@ class WeatherActivity : AppCompatActivity() {
         val minutelyList = weather.minutelyList.minutelyList
         minutelySummary.text = weather.minutelyList.summary
         for (i in minutelyList.indices) {
-            val view = LayoutInflater.from(this).inflate(R.layout.minutely_item, minutelyLayout, false)
+            val view =
+                LayoutInflater.from(this).inflate(R.layout.minutely_item, minutelyLayout, false)
             val minutelyFxTime = view.findViewById(R.id.minutelyFxTime) as TextView
             val minutelyText = view.findViewById(R.id.minutelyText) as TextView
             val minutelyPrecip = view.findViewById(R.id.minutelyPrecip) as TextView
@@ -173,9 +179,11 @@ class WeatherActivity : AppCompatActivity() {
         realtimeIndicesLLayout.removeAllViews()
         val realTimeIndicesList = weather.realTimeIndicesList
         for (i in realTimeIndicesList.indices) {
-            val view = LayoutInflater.from(this).inflate(R.layout.realtime_indices_item, realtimeIndicesLLayout, false)
+            val view = LayoutInflater.from(this)
+                .inflate(R.layout.realtime_indices_item, realtimeIndicesLLayout, false)
             val realtimeIndicesName = view.findViewById(R.id.realtimeIndicesName) as TextView
-            val realtimeIndicesCategory = view.findViewById(R.id.realtimeIndicesCategory) as TextView
+            val realtimeIndicesCategory =
+                view.findViewById(R.id.realtimeIndicesCategory) as TextView
             val realtimeIndicesText = view.findViewById(R.id.realtimeIndicesText) as TextView
             realtimeIndicesName.text = realTimeIndicesList[i].name
             realtimeIndicesCategory.text = realTimeIndicesList[i].category

@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/cityMenu"
-        android:icon="@drawable/icon_100"
-        android:title="cityMenu"
-        app:showAsAction="always"/>
+        android:icon="@drawable/icon_city"
+        app:showAsAction="ifRoom"
+        android:title="@string/city" />
 
     <item
         android:id="@+id/setting"
-        android:title="setting"
+        android:title="@string/setting"
         app:showAsAction="never"/>
 </menu>

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.suyyy.dayweather.R
+import cn.suyyy.dayweather.app.MainActivity
 import cn.suyyy.dayweather.ui.weather.WeatherActivity
 import cn.suyyy.dayweather.util.showToast
 import kotlinx.android.synthetic.main.fragment_city.*
@@ -28,15 +29,14 @@ class CityFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_city,container,false)
+        return inflater.inflate(R.layout.fragment_city, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        if (viewModel.isCitySaved()){
+        if (activity is MainActivity && viewModel.isCitySaved()) {
             val city = viewModel.getSaveCity()
-            val intent = Intent(context,WeatherActivity::class.java).apply {
+            val intent = Intent(context, WeatherActivity::class.java).apply {
                 val location = "${city.lon},${city.lat}"
                 putExtra("city_location", location)
                 putExtra("city_name", city.name)
@@ -48,16 +48,18 @@ class CityFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = layoutManager
+        if (activity is MainActivity) {
+            viewModel.getHotCityList()
+        }
         // 加载热门数据
-        viewModel.getHotCityList()
-        adapter = CityAdapter(this,viewModel.cityList)
+        adapter = CityAdapter(this, viewModel.cityList)
         recyclerView.adapter = adapter
 
         searchCityEdit.addTextChangedListener { editable ->
             val content = editable.toString()
-            if (content.isNotEmpty()){
+            if (content.isNotEmpty()) {
                 viewModel.searchCityList(content)
-            }else{
+            } else {
                 viewModel.cityList.clear()
                 adapter.notifyDataSetChanged()
             }

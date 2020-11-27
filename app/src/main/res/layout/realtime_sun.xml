@@ -32,7 +32,7 @@
                 android:id="@+id/realtimeSunrise"
                 android:layout_width="wrap_content"
                 android:paddingBottom="10dp"
-                android:paddingStart="10dp"
+                android:paddingStart="20dp"
                 android:layout_alignParentStart="true"
                 android:layout_height="wrap_content"/>
 
@@ -40,7 +40,7 @@
                 android:id="@+id/realtimeSunset"
                 android:layout_width="wrap_content"
                 android:paddingBottom="10dp"
-                android:paddingEnd="10dp"
+                android:paddingEnd="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_height="wrap_content"/>
 
