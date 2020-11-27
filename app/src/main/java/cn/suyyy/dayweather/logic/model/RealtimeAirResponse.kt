@@ -1,8 +1,9 @@
 package cn.suyyy.dayweather.logic.model
 
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
-class RealtimeAirResponse(val code: String, val updateTime: Date, val realtimeAir: RealtimeAir ) {
+class RealtimeAirResponse(val code: String, val updateTime: Date, @SerializedName("now") val realtimeAir: RealtimeAir ) {
     class RealtimeAir(
         val pubTime: Date,
         val aqi: String,

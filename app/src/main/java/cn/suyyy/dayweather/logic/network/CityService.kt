@@ -15,6 +15,6 @@ interface CityService {
     @GET("v2/city/lookup?key=${CoreConstant.TOKEN}")
     fun searchCityList(@Query("location") query: String): Call<CityResponse>
 
-    @GET("v2/city/top?${CoreConstant.TOKEN}&range=cn")
+    @GET("v2/city/top?key=${CoreConstant.TOKEN}")
     fun getHotCityList(): Call<HotCityResponse>
 }

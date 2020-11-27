@@ -3,7 +3,7 @@ package cn.suyyy.dayweather.logic.model
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-class DailyResponse(val code: String, val updateTime: Date, @SerializedName("daily") val dailyList: List<Daily>) {
+class DailyResponse(val code: String, @SerializedName("daily") val dailyList: List<Daily>) {
     class Daily(
         val fxDate: String,
         val sunrise: String,

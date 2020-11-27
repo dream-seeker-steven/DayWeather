@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">DayWeather</string>
 
-    <string name="input_address">输入地址</string>
+    <string name="input_address">请输入省、市、县搜索</string>
+    <string name="input_title">搜索城市</string>
     <string name="or">|</string>
-    <string name="forecast">预报</string>
-    <string name="life_index">生活指数</string>
+    <string name="forecast">7天预报</string>
+    <string name="hourly">逐小时预报</string>
+    <string name="minutely">分钟级降水</string>
+    <string name="realtime_air">空气质量</string>
+    <string name="realtime_wind">风和湿度</string>
+    <string name="realtime_sun">日出日落</string>
+    <string name="realtime_indices">生活指数</string>
+
     <string name="cold">感冒</string>
     <string name="dressing">穿衣</string>
     <string name="realtime_uv">实时紫外线</string>

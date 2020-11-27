@@ -1,10 +1,11 @@
 package cn.suyyy.dayweather.logic.model
 
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
-class MinutelyResponse(val code: String, val updateTime: Date, val summary: String, val minutelyList: List<Minutely>) {
+class MinutelyResponse(val code: String, val summary: String, @SerializedName("minutely")val minutelyList: List<Minutely>) {
     class Minutely(
-        val fxTime: String,
+        val fxTime: Date,
         val precip: String,
         val type: String
     )

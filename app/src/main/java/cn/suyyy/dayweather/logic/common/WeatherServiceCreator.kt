@@ -4,11 +4,11 @@ import cn.suyyy.dayweather.constants.CoreConstant
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ServiceCreator {
+object WeatherServiceCreator {
 
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(CoreConstant.CITY_URL)
+        .baseUrl(CoreConstant.WEATHER_URL)
         .build()
 
     fun <T> create(serviceClass: Class<T>): T = retrofit.create(serviceClass)

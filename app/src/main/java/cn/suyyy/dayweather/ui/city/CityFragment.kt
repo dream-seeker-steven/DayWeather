@@ -1,5 +1,6 @@
 package cn.suyyy.dayweather.ui.city
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.suyyy.dayweather.R
+import cn.suyyy.dayweather.ui.weather.WeatherActivity
 import cn.suyyy.dayweather.util.showToast
 import kotlinx.android.synthetic.main.fragment_city.*
 
@@ -31,8 +33,23 @@ class CityFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        if (viewModel.isCitySaved()){
+            val city = viewModel.getSaveCity()
+            val intent = Intent(context,WeatherActivity::class.java).apply {
+                val location = "${city.lon},${city.lat}"
+                putExtra("city_location", location)
+                putExtra("city_name", city.name)
+            }
+            startActivity(intent)
+            activity?.finish()
+            return
+        }
+
         val layoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = layoutManager
+        // 加载热门数据
+        viewModel.getHotCityList()
         adapter = CityAdapter(this,viewModel.cityList)
         recyclerView.adapter = adapter
 
@@ -41,8 +58,6 @@ class CityFragment : Fragment() {
             if (content.isNotEmpty()){
                 viewModel.searchCityList(content)
             }else{
-                recyclerView.visibility = View.GONE
-                bgImageView.visibility = View.VISIBLE
                 viewModel.cityList.clear()
                 adapter.notifyDataSetChanged()
             }
@@ -50,14 +65,25 @@ class CityFragment : Fragment() {
         viewModel.cityLiveData.observe(viewLifecycleOwner, Observer { result ->
             val cityList = result.getOrNull()
             if (cityList != null) {
-                recyclerView.visibility = View.VISIBLE
-                bgImageView.visibility = View.GONE
                 viewModel.cityList.clear()
+                recyclerView.visibility = View.VISIBLE
                 viewModel.cityList.addAll(cityList)
                 adapter.notifyDataSetChanged()
             } else {
+                viewModel.cityList.clear()
+                recyclerView.visibility = View.GONE
+                adapter.notifyDataSetChanged()
                 "未能查询到任何地点".showToast()
                 result.exceptionOrNull()?.printStackTrace()
+            }
+        })
+
+        viewModel.hotCityLiveData.observe(viewLifecycleOwner, Observer { result ->
+            val cityList = result.getOrNull()
+            if (cityList != null) {
+                recyclerView.visibility = View.VISIBLE
+                viewModel.cityList.addAll(cityList)
+                adapter.notifyDataSetChanged()
             }
         })
     }

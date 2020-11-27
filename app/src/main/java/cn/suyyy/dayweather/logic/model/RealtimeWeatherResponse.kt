@@ -6,7 +6,7 @@ import java.util.*
 class RealtimeWeatherResponse(val code: String, val updateTime: Date, @SerializedName("now") val realtimeWeather: RealtimeWeather) {
     class RealtimeWeather(
         val obsTime: Date,
-        val tempe: String,
+        val temp: String,
         val feelsLike: String,
         val icon: String,
         val text: String,
