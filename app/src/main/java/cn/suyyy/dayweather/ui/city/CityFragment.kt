@@ -1,12 +1,19 @@
 package cn.suyyy.dayweather.ui.city
 
 import android.Manifest
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -15,8 +22,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.suyyy.dayweather.R
 import cn.suyyy.dayweather.app.MainActivity
+import cn.suyyy.dayweather.base.GlobalApplication
 import cn.suyyy.dayweather.ui.weather.WeatherActivity
 import cn.suyyy.dayweather.util.showToast
+import com.amap.api.location.AMapLocation
+import com.amap.api.location.AMapLocationClient
+import com.amap.api.location.AMapLocationClientOption
+import com.amap.api.location.AMapLocationListener
+import com.loc.ac
 import kotlinx.android.synthetic.main.fragment_city.*
 
 
@@ -48,7 +61,6 @@ class CityFragment : Fragment() {
             activity?.finish()
             return
         }
-
         val layoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = layoutManager
         if (activity is MainActivity) {
@@ -92,4 +104,11 @@ class CityFragment : Fragment() {
             }
         })
     }
+
+
+
+
+
+
+
 }
