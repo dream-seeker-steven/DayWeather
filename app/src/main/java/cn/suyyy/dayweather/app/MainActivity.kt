@@ -182,6 +182,7 @@ class MainActivity : AppCompatActivity() {
     inner class MyLocationListener(val context: Context) : AMapLocationListener {
         override fun onLocationChanged(location: AMapLocation?) {
             if (location?.getErrorCode() == 0) {
+                "使用了定位".showToast()
                 if (!viewModel.isCitySaved()) {
                     // 查到地点后的逻辑
                     AlertDialog.Builder(context).apply {
@@ -194,7 +195,7 @@ class MainActivity : AppCompatActivity() {
                                     putExtra("city_name", location.district)
                                 }
                                 val city = City(location.district,"${location.longitude}",
-                                    "location.latitude",location.city,location.province,location.country)
+                                    "${location.latitude}",location.city,location.province,location.country)
                                 viewModel.saveCity(city)
                                 startActivity(intent)
                                 finish()
