@@ -1,6 +1,6 @@
 package cn.suyyy.dayweather.logic.model
 
-class HotCityResponse(val code: String,  val topCityList: List<City>)
+class HotCityResponse(val code: String, val topCityList: List<City>)
 
 /*
 * {

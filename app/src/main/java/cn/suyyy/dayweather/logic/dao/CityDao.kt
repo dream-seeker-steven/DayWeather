@@ -15,9 +15,9 @@ object CityDao {
     /**
      * 保存城市信息
      */
-    fun saveCity(city: City):Boolean {
-        sharedPreferences().edit(){
-            putString("city",Gson().toJson(city))
+    fun saveCity(city: City): Boolean {
+        sharedPreferences().edit() {
+            putString("city", Gson().toJson(city))
         }
         return true
     }
@@ -25,9 +25,9 @@ object CityDao {
     /**
      * 从存储中获取城市信息
      */
-    fun getSaveCity() : City {
+    fun getSaveCity(): City {
         val cityJson = sharedPreferences().getString("city", "")
-        return Gson().fromJson(cityJson,City::class.java)
+        return Gson().fromJson(cityJson, City::class.java)
     }
 
     /**

@@ -15,18 +15,21 @@ interface WeatherService {
     fun getDaily(@Query("location") query: String): Call<DailyResponse>
 
     @GET("v7/weather/24h?key=${CoreConstant.TOKEN}")
-    fun getHourly(@Query("location")query: String): Call<HourlyResponse>
+    fun getHourly(@Query("location") query: String): Call<HourlyResponse>
 
     @GET("v7/minutely/5m?key=${CoreConstant.TOKEN}")
-    fun getMinutely(@Query("location")query: String): Call<MinutelyResponse>
+    fun getMinutely(@Query("location") query: String): Call<MinutelyResponse>
 
     @GET("v7/air/now?key=${CoreConstant.TOKEN}")
-    fun getRealtimeAir(@Query("location")query: String): Call<RealtimeAirResponse>
+    fun getRealtimeAir(@Query("location") query: String): Call<RealtimeAirResponse>
 
     @GET("v7/indices/1d?key=${CoreConstant.TOKEN}&type=0")
-    fun getIndices(@Query("location")query: String): Call<RealTimeIndicesResponse>
+    fun getIndices(@Query("location") query: String): Call<RealTimeIndicesResponse>
 
     // yyyyMMdd
     @GET("v7/astronomy/sunmoon?key=${CoreConstant.TOKEN}")
-    fun getSunrise(@Query("location")query: String, @Query("date") date: String): Call<SunriseResponse>
+    fun getSunrise(
+        @Query("location") query: String,
+        @Query("date") date: String
+    ): Call<SunriseResponse>
 }

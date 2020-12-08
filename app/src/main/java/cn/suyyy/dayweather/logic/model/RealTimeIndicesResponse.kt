@@ -2,7 +2,10 @@ package cn.suyyy.dayweather.logic.model
 
 import com.google.gson.annotations.SerializedName
 
-class RealTimeIndicesResponse(val code: String,@SerializedName("daily") val indicesDailyList: List<IndicesDaily>) {
+class RealTimeIndicesResponse(
+    val code: String,
+    @SerializedName("daily") val indicesDailyList: List<IndicesDaily>
+) {
     class IndicesDaily(
         val name: String,
         val category: String,

@@ -29,7 +29,8 @@ object GlobalNetwork {
     suspend fun getMinutely(query: String) = weatherService.getMinutely(query).await()
     suspend fun getRealtimeAir(query: String) = weatherService.getRealtimeAir(query).await()
     suspend fun getIndices(query: String) = weatherService.getIndices(query).await()
-    suspend fun getSunrise(query: String,date: String) = weatherService.getSunrise(query,date).await()
+    suspend fun getSunrise(query: String, date: String) =
+        weatherService.getSunrise(query, date).await()
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->
@@ -43,6 +44,7 @@ object GlobalNetwork {
                         continuation.resumeWithException(RuntimeException("response body is null"))
                     }
                 }
+
                 override fun onFailure(call: Call<T>, t: Throwable) {
                     continuation.resumeWithException(t)
                 }

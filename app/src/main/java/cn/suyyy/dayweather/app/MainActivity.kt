@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 // 申请权限
                 requestLocationPermissions()
                 // 定位
-                if (!isGPSAvailable(this)){
+                if (!isGPSAvailable(this)) {
                     AlertDialog.Builder(this).apply {
                         setTitle("提示")
                         setCancelable(false)
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                             }
 
                     }.show()
-                }else{
+                } else {
                     "正在定位，请稍后...".showToast()
                     val location = getMapLocation()
                     location.stopLocation()
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*是否开启了定位*/
-    private fun isGPSAvailable(context: Context): Boolean{
+    private fun isGPSAvailable(context: Context): Boolean {
         val locationManager =
             context.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -227,8 +227,14 @@ class MainActivity : AppCompatActivity() {
                                     putExtra("city_location", lola)
                                     putExtra("city_name", location.district)
                                 }
-                                val city = City(location.district,"${location.longitude}",
-                                    "${location.latitude}",location.city,location.province,location.country)
+                                val city = City(
+                                    location.district,
+                                    "${location.longitude}",
+                                    "${location.latitude}",
+                                    location.city,
+                                    location.province,
+                                    location.country
+                                )
                                 viewModel.saveCity(city)
                                 startActivity(intent)
                                 finish()

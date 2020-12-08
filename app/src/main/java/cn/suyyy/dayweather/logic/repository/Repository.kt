@@ -40,7 +40,7 @@ object Repository {
         }
     }
 
-    fun saveCity(city: City) =  CityDao.saveCity(city)
+    fun saveCity(city: City) = CityDao.saveCity(city)
 
     fun getSaveCity() = CityDao.getSaveCity()
 

@@ -158,9 +158,9 @@ class WeatherActivity : AppCompatActivity() {
             val minutelyPrecip = view.findViewById(R.id.minutelyPrecip) as TextView
             minutelyFxTime.text = formatHm(minutelyList[i].fxTime)
             minutelyText.text = TypeUtils.getRainType(minutelyList[i].type)
-            if("0.0" == minutelyList[i].precip){
+            if ("0.0" == minutelyList[i].precip) {
                 minutelyPrecip.text = "无"
-            }else{
+            } else {
                 minutelyPrecip.text = minutelyList[i].precip
             }
             minutelyLayout.addView(view)
@@ -199,9 +199,9 @@ class WeatherActivity : AppCompatActivity() {
         }
     }
 
-    private fun getWeek(calendar: Calendar): String{
+    private fun getWeek(calendar: Calendar): String {
         val week = calendar.get(Calendar.DAY_OF_WEEK) - 1
-        return when(week){
+        return when (week) {
             1 -> "星期一"
             2 -> "星期二"
             3 -> "星期三"
