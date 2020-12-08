@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -108,13 +109,19 @@ class WeatherActivity : AppCompatActivity() {
         dailyLayout.removeAllViews()
         // 填充daily_item.xml
         val dailyList = weather.dailyList
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         for (i in dailyList.indices) {
             val view = LayoutInflater.from(this).inflate(R.layout.daily_item, dailyLayout, false)
+            // 转换星期显示
+            val fxDate = dateFormat.parse(dailyList[i].fxDate)
+            calendar.time = fxDate
+            val week = getWeek(calendar)
             val dailyFxDate = view.findViewById(R.id.dailyFxDate) as TextView
             val dailySkyIcon = view.findViewById(R.id.dailySkyIcon) as ImageView
             val dailyText = view.findViewById(R.id.dailyText) as TextView
             val dailyTemp = view.findViewById(R.id.dailyTemp) as TextView
-            dailyFxDate.text = dailyList[i].fxDate
+            dailyFxDate.text = week
             dailyText.text = dailyList[i].textDay
             dailySkyIcon.setImageResource(IconUtils.getDayIcon(dailyList[i].iconDay))
             dailyTemp.text = "${dailyList[i].tempMin} ℃ ~ ${dailyList[i].tempMax} ℃"
@@ -132,7 +139,7 @@ class WeatherActivity : AppCompatActivity() {
             val hourlyText = view.findViewById(R.id.hourlyText) as TextView
             val hourlyTemp = view.findViewById(R.id.hourlyTemp) as TextView
 
-            hourlyFxTime.text = "${formatH(hourlyList[i].fxTime)} 时"
+            hourlyFxTime.text = "${formatH(hourlyList[i].fxTime)} 点"
             hourlySkyIcon.setImageResource(IconUtils.getDayIcon(hourlyList[i].icon))
             hourlyText.text = hourlyList[i].text
             hourlyTemp.text = "${hourlyList[i].temp} ℃"
@@ -151,7 +158,11 @@ class WeatherActivity : AppCompatActivity() {
             val minutelyPrecip = view.findViewById(R.id.minutelyPrecip) as TextView
             minutelyFxTime.text = formatHm(minutelyList[i].fxTime)
             minutelyText.text = TypeUtils.getRainType(minutelyList[i].type)
-            minutelyPrecip.text = minutelyList[i].precip
+            if("0.0" == minutelyList[i].precip){
+                minutelyPrecip.text = "无"
+            }else{
+                minutelyPrecip.text = minutelyList[i].precip
+            }
             minutelyLayout.addView(view)
         }
 
@@ -185,6 +196,19 @@ class WeatherActivity : AppCompatActivity() {
             realtimeIndicesCategory.text = realTimeIndicesList[i].category
             realtimeIndicesText.text = realTimeIndicesList[i].text
             realtimeIndicesLLayout.addView(view)
+        }
+    }
+
+    private fun getWeek(calendar: Calendar): String{
+        val week = calendar.get(Calendar.DAY_OF_WEEK) - 1
+        return when(week){
+            1 -> "星期一"
+            2 -> "星期二"
+            3 -> "星期三"
+            4 -> "星期四"
+            5 -> "星期五"
+            6 -> "星期六"
+            else -> "星期天"
         }
     }
 

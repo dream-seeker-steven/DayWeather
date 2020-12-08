@@ -24,23 +24,37 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/realtimeAirCategory"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="14sp" />
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            app:contentPadding="6dp"
+            app:cardCornerRadius="4dp">
 
-        <TextView
-            android:id="@+id/realtimeAirAqi"
+            <TextView
+                android:id="@+id/realtimeAirCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="14sp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="14sp" />
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            app:contentPadding="6dp"
+            app:cardCornerRadius="4dp">
+
+            <TextView
+                android:id="@+id/realtimeAirAqi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="14sp" />
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
