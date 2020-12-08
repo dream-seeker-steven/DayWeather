@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if (!isInternetAvailable(this)) {
             AlertDialog.Builder(this).apply {
                 setTitle("提示")
@@ -69,7 +68,6 @@ class MainActivity : AppCompatActivity() {
 
                     }.show()
                 } else {
-                    "正在定位，请稍后...".showToast()
                     val location = getMapLocation()
                     location.stopLocation()
                     location.startLocation()
@@ -207,6 +205,10 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (temp == 0) {
                         // 已允许全部权限
+                        "正在定位，请稍后...".showToast()
+                        val location = getMapLocation()
+                        location.stopLocation()
+                        location.startLocation()
                     }
                 }
             }
@@ -220,7 +222,8 @@ class MainActivity : AppCompatActivity() {
                     // 查到地点后的逻辑
                     AlertDialog.Builder(context).apply {
                         setTitle("提示")
-                        setMessage("检测到您当前位置是 ${location.district} 是都立即切换城市")
+                        setCancelable(false)
+                        setMessage("检测到您当前位置是 ${location.district} 是否立即切换城市")
                             .setPositiveButton("切换") { dialog, which ->
                                 val intent = Intent(context, WeatherActivity::class.java).apply {
                                     val lola = "${location.longitude},${location.latitude}"
