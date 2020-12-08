@@ -5,10 +5,12 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -23,7 +25,6 @@ import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -39,8 +40,11 @@ class MainActivity : AppCompatActivity() {
         if (!isInternetAvailable(this)) {
             AlertDialog.Builder(this).apply {
                 setTitle("提示")
+                setCancelable(false)
                 setMessage("未检测到网络，请检查！")
                     .setPositiveButton("检查网络") { dialog, which ->
+                        val intent = Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS)
+                        startActivity(intent)
                         finish()
                     }
             }.show()
@@ -48,9 +52,28 @@ class MainActivity : AppCompatActivity() {
             if (!viewModel.isCitySaved()) {
                 // 申请权限
                 requestLocationPermissions()
-                val location = getMapLocation()
-                location.stopLocation()
-                location.startLocation()
+                // 定位
+                if (!isGPSAvailable(this)){
+                    AlertDialog.Builder(this).apply {
+                        setTitle("提示")
+                        setCancelable(false)
+                        setMessage("检测到您未开启高精度GPS，是否立即开启?")
+                            .setPositiveButton("使用定位") { dialog, which ->
+                                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                                startActivity(intent)
+                                finish()
+                            }
+                            .setNegativeButton("手动输入") { dialog, which ->
+
+                            }
+
+                    }.show()
+                }else{
+                    "正在定位，请稍后...".showToast()
+                    val location = getMapLocation()
+                    location.stopLocation()
+                    location.startLocation()
+                }
             }
             setContentView(R.layout.activity_main)
             setSupportActionBar(mainToolbar)
@@ -58,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /*是否开启了网络*/
     @Suppress("DEPRECATION")
     private fun isInternetAvailable(context: Context): Boolean {
         var result = false
@@ -86,6 +110,19 @@ class MainActivity : AppCompatActivity() {
         }
         return result
     }
+
+    /*是否开启了定位*/
+    private fun isGPSAvailable(context: Context): Boolean{
+        val locationManager =
+            context.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        val network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if (gps && network) {
+            return true;
+        }
+        return false
+    }
+
 
     private fun getMapLocation(): AMapLocationClient {
         val locationClient = AMapLocationClient(GlobalApplication.context)
@@ -169,10 +206,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     if (temp == 0) {
-                        "正在定位".showToast()
-                        val location = getMapLocation()
-                        location.stopLocation()
-                        location.startLocation()
+                        // 已允许全部权限
                     }
                 }
             }
@@ -182,7 +216,6 @@ class MainActivity : AppCompatActivity() {
     inner class MyLocationListener(val context: Context) : AMapLocationListener {
         override fun onLocationChanged(location: AMapLocation?) {
             if (location?.getErrorCode() == 0) {
-                "使用了定位".showToast()
                 if (!viewModel.isCitySaved()) {
                     // 查到地点后的逻辑
                     AlertDialog.Builder(context).apply {
